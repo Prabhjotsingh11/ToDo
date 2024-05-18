@@ -1,6 +1,33 @@
 let newnote = document.getElementById("addTxt");
 let submitBtn = document.getElementById("submitBtn");
+let logoutBtn=document.getElementById("logout");
+let loginBtn=document.getElementById("login");
+let signupBtn=document.getElementById("signup");
+logoutBtn.addEventListener('click',()=>{
+    let token=localStorage.removeItem('token');
+    // await render();
+    checkAuth();
+    window.location.reload();
+    // token="";
+    // localStorage.setItem('token',token);
+})
 
+function checkAuth() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      // User is logged in
+      loginBtn.style.display = "none";
+      signupBtn.style.display = "none";
+      logoutBtn.style.display = "block";
+    } else {
+      // User is not logged in
+      loginBtn.style.display = "block";
+      signupBtn.style.display = "block";
+      logoutBtn.style.display = "none";
+    }
+  }
+
+  checkAuth();
 function clearInputBox() {
   newnote.value = "";
 }
